@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import webshop.model.Category;
 import webshop.model.Product;
 import webshop.repository.CategoryRepository;
+import webshop.repository.ProductRepository;
 
 @RequiredArgsConstructor
 @Service
@@ -16,12 +17,15 @@ public class CategoryService {
 
 	private final CategoryRepository categoryRepository;
 	
+	private final ProductRepository productRepository;
+	
 	@Transactional
 	public void discountProductInCategory(String catName, int percent) {
 		List<Category> categories = categoryRepository.findByName(catName);
 		categories.forEach(c -> {
 			c.getProducts().forEach(p -> {
 				discountProduct(percent, p);
+				productRepository.save(p); //nem kell a @Transactional miatt
 			});
 		});
 	}

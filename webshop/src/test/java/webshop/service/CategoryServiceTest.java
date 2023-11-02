@@ -16,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import webshop.model.Category;
 import webshop.model.Product;
 import webshop.repository.CategoryRepository;
+import webshop.repository.ProductRepository;
 
 @ExtendWith(MockitoExtension.class)
 public class CategoryServiceTest {
@@ -25,6 +26,9 @@ public class CategoryServiceTest {
 	
 	@Mock
 	CategoryRepository categoryRepository;
+	
+	@Mock
+	ProductRepository productRepository;
 	
 	
 	@Test
@@ -41,12 +45,15 @@ public class CategoryServiceTest {
 			Arrays.asList(cat)
 		);
 		
+		when(productRepository.save(any())).thenAnswer(inv -> inv.getArguments()[0]);
+		
 		//ACT
 		categoryService.discountProductInCategory("testcat", 10);
 		
 		//ASSERT
 		assertThat(cat.getProducts().get(0).getPrice()).isCloseTo(90.0, offset(0.00001));
 		assertThat(cat.getProducts().get(1).getPrice()).isCloseTo(180.0, offset(0.00001));		
+		verify(productRepository, times(2)).save(any());
 	}
 	
 	
