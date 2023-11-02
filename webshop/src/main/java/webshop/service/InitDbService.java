@@ -31,7 +31,7 @@ public class InitDbService {
 //		cat1.addProduct(prod1);
 //		cat1.addProduct(prod2);
 //		cat2.addProduct(prod3);
-		categoryService.discountProductInCategory("cat1", 10);
+//		categoryService.discountProductInCategory("cat1", 10);
 	}
 
 	private Product createProduct(String name, double price) {
