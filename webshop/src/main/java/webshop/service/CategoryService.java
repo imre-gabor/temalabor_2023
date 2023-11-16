@@ -1,10 +1,12 @@
 package webshop.service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import webshop.model.Category;
 import webshop.model.Product;
@@ -32,5 +34,12 @@ public class CategoryService {
 
 	private void discountProduct(int percent, Product p) {
 		p.setPrice(p.getPrice() * (100.0-percent) /100.0);
+	}
+	
+	@Transactional
+	public Category update(Category category) {
+		if(!categoryRepository.existsById(category.getId()))
+			throw new EntityNotFoundException();
+		return categoryRepository.save(category);
 	}
 }

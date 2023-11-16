@@ -21,17 +21,17 @@ public class InitDbService {
 	
 	@Transactional
 	public void initDb() {
-//		Product prod1 = createProduct("prod1", 100.0);
-//		Product prod2 = createProduct("prod2", 200.0);
-//		Product prod3 = createProduct("prod3", 100.0);
-//		
-//		Category cat1 = categoryRepository.save(Category.builder().name("cat1").build());
-//		Category cat2 = categoryRepository.save(Category.builder().name("cat2").build());
-//		
-//		cat1.addProduct(prod1);
-//		cat1.addProduct(prod2);
-//		cat2.addProduct(prod3);
-//		categoryService.discountProductInCategory("cat1", 10);
+		Product prod1 = createProduct("prod1", 100.0);
+		Product prod2 = createProduct("prod2", 200.0);
+		Product prod3 = createProduct("prod3", 100.0);
+		
+		Category cat1 = categoryRepository.save(Category.builder().name("cat1").build());
+		Category cat2 = categoryRepository.save(Category.builder().name("cat2").build());
+		
+		cat1.addProduct(prod1);
+		cat1.addProduct(prod2);
+		cat2.addProduct(prod3);
+		categoryService.discountProductInCategory("cat1", 10);
 	}
 
 	private Product createProduct(String name, double price) {
