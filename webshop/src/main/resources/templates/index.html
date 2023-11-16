@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Spring Boot Thymeleaf Hello World Example</title>
+
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.2.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+
+</head>
+
+<body>
+
+	<table>
+		<tr th:each="cat : ${categories}">
+			<td><span th:text="${cat.id}">1</span></td>
+			<td><span th:text="${cat.name}">MyCategory</span></td>
+		</tr>
+	</table>
+	
+	<form th:action="@{/newCategory}" method="post" th:object="${newCat}">
+		<input th:field="*{name}"><br/>
+		<input type="submit" value="OK">
+	</form>
+
+</body>
+</html>
